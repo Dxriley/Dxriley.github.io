@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title style="text-align: center">
+      DXR's 5 day weather app
+    </ion-title>
+    <ion-segment >
+    	<ion-segment-button value="C" style="max-width: 20px;float: right">
+    		C
+    	</ion-segment-button>
+    	<ion-segment-button class="segment-activated" value="F" style="max-width: 20px;float: right">
+    		F
+    	</ion-segment-button>
+    </ion-segment>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+ 	<h2>{{city.name}}<br>5 Day Forcast</h2>
+ 	<hr>
+	<div [hidden]="isDoneLoading" style="text-align: center">
+		<ion-spinner style="text-align:center"></ion-spinner>
+	</div>
+	<div style="text-align: center">
+		<div [hidden]="!isDoneLoading"  class="container">
+		    <div *ngFor='let day of basicFiveDayForcast' class="dayBox">
+		      <p class="dayOfWeek">{{day.dayOfWeek}}</p>
+		      <p>{{day.date}}</p>
+		      <hr>
+		      <p>High: {{day.highTemp}} &#8457;</p>
+		      <p>Low: {{day.lowTemp}} &#8457;</p>
+		      <p> </p>
+		    </div>
+    	</div>
+	    <hr>
+	    <h5>vvv 3 hour details vvv</h5>
+	    <hr>
+	  	<div *ngFor='let aDay of basicFiveDayForcast' class="container">
+	    	<p class="dayOfWeek">{{aDay.dayOfWeek}} - Every 3 hour forcast</p>
+		    <div *ngFor='let threeHour of aDay.threeHourForcast' class="threeHourBox">
+		      <p>Hour:{{threeHour.dt_txt.substring(11,13)}}</p>
+		      <p>{{threeHour.main.temp}}</p>
+		    </div>
+		 </div>
+ 	</div>
+</ion-content>
+
+<ion-footer class="footer">
+	  	<h5 class="title" style="color: grey">
+	  		 by Dan Riley
+	  	</h5>
+	  	<p style="font-weight:bold; font-style: italic; color: red; font-size: 10pt">!!! Just noticed: I didn't adjust date-times to city date-time... very cool at noon... -_- !!!</p>
+</ion-footer>
